@@ -16,7 +16,7 @@ SCHEDULER.every '2s' do
   send_event('welcome', { title: titles.sample, text: texts.sample })
 end
 
-SCHEDULER.every '2s', :first_in => 0 do
+SCHEDULER.every '120s', :first_in => 0 do
 	
 	github = Github.new
 	commit_message = github.repos.commits.all('limeblast', 'make-it-with-code-dashing').first.commit.message
