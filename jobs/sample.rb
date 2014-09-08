@@ -1,3 +1,5 @@
+require 'github_api'
+
 SCHEDULER.every '2s' do
   titles = [
   	'What an awesome title, just superb',
@@ -12,7 +14,12 @@ SCHEDULER.every '2s' do
   ]
   
   send_event('welcome', { title: titles.sample, text: texts.sample })
-  
-  send_event('recent_git_commit', { text: 'This is going to be a commit message' })
-  
+end
+
+SCHEDULER.every '2s', :first_in => 0 do
+	
+	github = Github.new
+	commit_message = github.repos.commits.all('limeblast', 'make-it-with-code-dashing').first.commit.message
+	
+	send_event('recent_git_commit', { text: commit_message })
 end
