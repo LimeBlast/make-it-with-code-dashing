@@ -13,4 +13,6 @@ SCHEDULER.every '2s' do
   
   send_event('welcome', { title: titles.sample, text: texts.sample })
   
+  send_event('recent_git_commit', { text: 'This is going to be a commit message' })
+  
 end
